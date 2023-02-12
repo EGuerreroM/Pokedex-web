@@ -1,10 +1,12 @@
-import './globals.css'
+'use client';
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+import { globalStyles } from '@/config/stitches.config';
+import { ReactNode } from 'react';
+
+import './globals.css';
+
+export default function RootLayout({ children }: { children: ReactNode }) {
+  globalStyles();
   return (
     <html lang="en">
       {/*
@@ -14,5 +16,5 @@ export default function RootLayout({
       <head />
       <body>{children}</body>
     </html>
-  )
+  );
 }
