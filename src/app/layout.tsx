@@ -1,20 +1,32 @@
 'use client';
 
 import { globalStyles } from '@/config/stitches.config';
-import { ReactNode } from 'react';
+import { ReactNode, useState } from 'react';
+import { QueryClient, QueryClientConfig, QueryClientProvider } from 'react-query';
 
-import './globals.css';
+const queryConfig: QueryClientConfig = {
+  defaultOptions: {
+    queries: {
+      staleTime: Infinity,
+    },
+  },
+};
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   globalStyles();
+
+  const [queryClient] = useState(() => new QueryClient(queryConfig));
+
   return (
-    <html lang="en">
-      {/*
+    <QueryClientProvider client={queryClient}>
+      <html lang="en">
+        {/*
         <head /> will contain the components returned by the nearest parent
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
-      <head />
-      <body>{children}</body>
-    </html>
+        <head />
+        <body>{children}</body>
+      </html>
+    </QueryClientProvider>
   );
 }
