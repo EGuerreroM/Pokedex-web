@@ -1,0 +1,9 @@
+# All files must be lf
+* text=auto eol=lf
+# Spell Right dictionary must be CRLF
+*.dict text eol=crlf
+# All ico, jpg, png and woff2 files are binary
+*.ico binary
+*.jpg binary
+*.png binary
+*.woff2 binary
