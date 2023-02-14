@@ -13,4 +13,5 @@ const ENDPOINTS = {
   POKEMONS,
   POKEDEXES,
 };
+
 export default ENDPOINTS;

@@ -41,6 +41,19 @@ export const { styled, getCssText, createTheme, globalCss, theme } = createStitc
     lineHeights: {
       large: '24px',
     },
+    fontWeights: {
+      regular: 400,
+      medium: 500,
+      semi: 600,
+    },
+    fontSizes: {
+      small: '14px',
+      medium: '16px',
+      large: '24px',
+    },
+    lineHeights: {
+      large: '24px',
+    },
   },
 });
 

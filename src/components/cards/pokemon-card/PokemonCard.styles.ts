@@ -7,7 +7,6 @@ export const CardContainer = styled('div', {
   backgroundColor: '$loContrast',
   boxShadow: '0px 1px 13px rgba(0,0,0,0.1);',
 });
-
 export const CardImageContainer = styled('div', {
   position: 'relative',
   height: '160px',

@@ -36,5 +36,4 @@ const Layouts = {
   Flex,
   Grid,
 };
-
 export default Layouts;

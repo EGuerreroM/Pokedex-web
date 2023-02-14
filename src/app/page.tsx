@@ -27,6 +27,7 @@ export default function Home() {
   const handlePokemonRegionClick = (url: string) => {
     setPokemonRegionUrl(url);
   };
+
   return (
     <main>
       <Layouts.Flex direction="row" css={{ alignItems: 'flex-start', gap: '1rem' }}>

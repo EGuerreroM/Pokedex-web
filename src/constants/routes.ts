@@ -10,5 +10,4 @@ const ROUTES = {
   IMAGES,
   POKEMONS,
 };
-
 export default ROUTES;

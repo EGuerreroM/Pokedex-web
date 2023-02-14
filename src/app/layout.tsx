@@ -17,7 +17,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   globalStyles();
 
   const [queryClient] = useState(() => new QueryClient(queryConfig));
-
   return (
     <QueryClientProvider client={queryClient}>
       <html lang="en">

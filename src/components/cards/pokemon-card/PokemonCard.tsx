@@ -10,6 +10,7 @@ type PokemonCardProps = {
 
 const PokemonCard = (props: PokemonCardProps) => {
   const { pokemonDetail } = props;
+
   const {
     sprites: { other },
   } = pokemonDetail;
