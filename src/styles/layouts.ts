@@ -11,8 +11,8 @@ const Flex = styled('div', {
       },
       column: {
         flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
+        justifyContent: 'flex-start',
+        alignItems: 'flex-start',
       },
     },
   },
@@ -20,8 +20,16 @@ const Flex = styled('div', {
 
 const Grid = styled('div', {
   display: 'grid',
+  width: '100%',
   gridTemplateColumns: 'repeat(3, 1fr)',
   gap: '1rem',
+  variants: {
+    layout: {
+      pokemonList: {
+        gridTemplateColumns: 'repeat(6, 178px)',
+      },
+    },
+  },
 });
 
 const Layouts = {
