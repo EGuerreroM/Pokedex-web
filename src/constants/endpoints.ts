@@ -6,6 +6,7 @@ const POKEMONS = {
 const POKEDEXES = {
   DATA: 'https://pokeapi.co/api/v2/pokedex',
   DETAIL: (name: string) => `https://pokeapi.co/api/v2/pokedex/${name}`,
+  KANTO: 'https://pokeapi.co/api/v2/pokedex/kanto',
 };
 
 const ENDPOINTS = {
