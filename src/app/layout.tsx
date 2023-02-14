@@ -1,6 +1,7 @@
 'use client';
 
 import { globalStyles } from '@/config/stitches.config';
+import { Layouts } from '@/styles';
 import { ReactNode, useState } from 'react';
 import { QueryClient, QueryClientConfig, QueryClientProvider } from 'react-query';
 
@@ -16,7 +17,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   globalStyles();
 
   const [queryClient] = useState(() => new QueryClient(queryConfig));
-
   return (
     <QueryClientProvider client={queryClient}>
       <html lang="en">
@@ -25,7 +25,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
         <head />
-        <body>{children}</body>
+        <body>
+          <Layouts.Flex direction="column" css={{ margin: '1rem' }}>
+            {children}
+          </Layouts.Flex>
+        </body>
       </html>
     </QueryClientProvider>
   );
