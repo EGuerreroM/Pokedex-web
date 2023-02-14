@@ -8,6 +8,19 @@ export const { styled, getCssText, createTheme, globalCss, theme } = createStitc
       primary: '#929aab',
       secondary: '#eeeeee',
     },
+    fontWeights: {
+      regular: 400,
+      medium: 500,
+      semi: 600,
+    },
+    fontSizes: {
+      small: '14px',
+      medium: '16px',
+      large: '24px',
+    },
+    lineHeights: {
+      large: '24px',
+    },
   },
 });
 
@@ -34,7 +47,7 @@ export const globalStyles = globalCss({
     overflowX: 'hidden',
   },
   body: {
-    fontFamily: 'system-ui, sans-serif',
+    fontFamily: 'roboto, sans-serif',
     color: '$hiContrast',
     backgroundColor: '$loContrast',
   },
