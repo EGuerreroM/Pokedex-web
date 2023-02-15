@@ -3,7 +3,7 @@
 import { PokemonCard } from '@/components/cards';
 import TIME from '@/constants/time';
 import { getPokemonDetail } from '@/services';
-import { Typography } from '@/styles';
+import { Layouts, Typography } from '@/styles';
 import { useQuery } from 'react-query';
 
 const PokemonDetail = ({ params }: { params: { pokemonName: string } }) => {
@@ -14,8 +14,15 @@ const PokemonDetail = ({ params }: { params: { pokemonName: string } }) => {
     queryFn: ({ signal }) => getPokemonDetail({ abortSignal: signal, name: pokemonName }),
     staleTime: TIME.ONE_DAY,
   });
+
   return pokemonDetailResponse ? (
-    <PokemonCard pokemonDetail={pokemonDetailResponse.data} />
+    <Layouts.Flex>
+      <PokemonCard pokemonDetail={pokemonDetailResponse.data} />
+      <Layouts.Flex direction="column">
+        <Typography.Body>Height</Typography.Body>
+        <Typography.Body>{pokemonDetailResponse.data.height}</Typography.Body>
+      </Layouts.Flex>
+    </Layouts.Flex>
   ) : (
     <Typography.Body>Loading...</Typography.Body>
   );

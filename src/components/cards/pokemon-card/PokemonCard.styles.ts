@@ -13,6 +13,10 @@ export const CardImageContainer = styled('div', {
   width: '100%',
 });
 
+export const CardImage = styled('img', {
+  width: '176px',
+});
+
 export const CardBody = styled('div', {
   padding: '1rem',
   display: 'flex',
