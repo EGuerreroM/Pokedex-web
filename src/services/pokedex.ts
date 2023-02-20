@@ -3,7 +3,6 @@ import VALIDATIONS from '@/constants/validations';
 import { IApiResponse } from '@/interfaces/API';
 import { IPokedex, IPokedexDetail } from '@/interfaces/API/IPokedex';
 import axios from 'axios';
-import { getPokemonsDetails } from './pokemon';
 
 type GetPokedexListArgs = {
   limit?: number;
