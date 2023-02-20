@@ -13,6 +13,7 @@
   "rules": {
     "no-unused-vars": "warn",
     "prettier/prettier": "warn",
+    "no-nested-ternary": "off",
     "import/extensions": [
       "warn",
       "ignorePackages",
