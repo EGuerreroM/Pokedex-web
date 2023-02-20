@@ -3,7 +3,7 @@
 import { ReactNode, useState } from 'react';
 import { QueryClient, QueryClientConfig, QueryClientProvider } from 'react-query';
 import { CacheProvider } from '@chakra-ui/next-js';
-import { ChakraProvider } from '@chakra-ui/react';
+import { Box, ChakraProvider, ColorModeScript, localStorageManager } from '@chakra-ui/react';
 
 import theme from '@/theme/theme';
 import { Navbar } from '@/layout';
@@ -11,7 +11,11 @@ import { Navbar } from '@/layout';
 const queryConfig: QueryClientConfig = {
   defaultOptions: {
     queries: {
-      staleTime: Infinity,
+      refetchOnWindowFocus: false,
+      keepPreviousData: true,
+      retry: false,
+      cacheTime: 0,
+      staleTime: 0,
     },
   },
 };
@@ -27,10 +31,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <head />
       <body>
         <CacheProvider>
-          <ChakraProvider theme={theme}>
+          <ChakraProvider theme={theme} colorModeManager={localStorageManager}>
+            <ColorModeScript initialColorMode={theme.config?.initialColorMode} />
             <QueryClientProvider client={queryClient}>
               <Navbar />
-              {children}
+              <Box margin={{ lg: '1.5rem', '2xl': '0 auto' }} maxWidth="1440px">
+                {children}
+              </Box>
             </QueryClientProvider>
           </ChakraProvider>
         </CacheProvider>
