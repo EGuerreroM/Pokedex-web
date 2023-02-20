@@ -1,3 +1,2 @@
-export { getPokemonsByPokedex, getPokedexList } from './pokedex';
-
-export { getPokemonDetail, getPokemonsDetails, getPokemonList } from './pokemon';
+export * from './pokedex';
+export * from './pokemon';

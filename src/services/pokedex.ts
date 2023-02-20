@@ -3,7 +3,6 @@ import VALIDATIONS from '@/constants/validations';
 import { IApiResponse } from '@/interfaces/API';
 import { IPokedex, IPokedexDetail } from '@/interfaces/API/IPokedex';
 import axios from 'axios';
-import { getPokemonsDetails } from './pokemon';
 
 type GetPokedexListArgs = {
   limit?: number;
@@ -22,7 +21,7 @@ export const getPokedexList = async ({ limit = 100, offset = 0, abortSignal }: G
   });
 };
 
-export const getPokemonsByPokedex = async ({ pokedexUrl, abortSignal }: GetPokedexDetailArgs) => {
+export const getPokedexDetails = async ({ pokedexUrl, abortSignal }: GetPokedexDetailArgs) => {
   const pokedexDetail = await axios.get<IPokedexDetail>(pokedexUrl, {
     signal: abortSignal,
   });
@@ -31,5 +30,10 @@ export const getPokemonsByPokedex = async ({ pokedexUrl, abortSignal }: GetPoked
 
   const filteredPokemons = pokemons.filter((pokemon) => !VALIDATIONS.FORBIDDEN_POKEMONS.includes(pokemon.pokemon_species.name));
 
-  return getPokemonsDetails({ names: filteredPokemons.map((pokemon) => pokemon.pokemon_species.name), abortSignal });
+  const filteredPokedex: IPokedexDetail = {
+    ...pokedexDetail.data,
+    pokemon_entries: filteredPokemons,
+  };
+
+  return filteredPokedex;
 };

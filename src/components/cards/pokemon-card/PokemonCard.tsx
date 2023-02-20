@@ -1,11 +1,15 @@
 import ROUTES from '@/constants/routes';
 import { IPokemonDetail } from '@/interfaces/API';
-import Image from 'next/image';
-import Link from 'next/link';
-import { CardBody, CardContainer, CardImageContainer } from './PokemonCard.styles';
+import { Card, CardBody, Image, Stack, Text } from '@chakra-ui/react';
 
 type PokemonCardProps = {
   pokemonDetail: IPokemonDetail;
+};
+
+const styledPokemonNumber = (number: number) => {
+  if (number < 10) return `00${number}`;
+  if (number < 100) return `0${number}`;
+  return number;
 };
 
 const PokemonCard = (props: PokemonCardProps) => {
@@ -17,21 +21,15 @@ const PokemonCard = (props: PokemonCardProps) => {
   const { name } = pokemonDetail;
 
   return (
-    <Link href={ROUTES.POKEMONS.DETAIL(name)} prefetch={false}>
-      <CardContainer>
-        <CardImageContainer>
-          <Image
-            src={other['official-artwork']?.front_default || ROUTES.IMAGES.PLACEHOLDER}
-            alt={name}
-            width={178}
-            height={178}
-          />
-        </CardImageContainer>
-        <CardBody>
-          <h3>{name}</h3>
-        </CardBody>
-      </CardContainer>
-    </Link>
+    <Card maxW="xs">
+      <CardBody>
+        <Image src={other['official-artwork']?.front_default || ROUTES.IMAGES.PLACEHOLDER} alt={name} />
+        <Stack alignItems="center">
+          <Text>{styledPokemonNumber(pokemonDetail.id)}</Text>
+          <Text>{name}</Text>
+        </Stack>
+      </CardBody>
+    </Card>
   );
 };
 

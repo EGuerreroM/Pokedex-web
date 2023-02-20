@@ -1,36 +1,47 @@
 'use client';
 
-import { globalStyles } from '@/config/stitches.config';
-import { Layouts } from '@/styles';
 import { ReactNode, useState } from 'react';
 import { QueryClient, QueryClientConfig, QueryClientProvider } from 'react-query';
+import { CacheProvider } from '@chakra-ui/next-js';
+import { Box, ChakraProvider, ColorModeScript, localStorageManager } from '@chakra-ui/react';
+
+import theme from '@/theme/theme';
+import { Navbar } from '@/layout';
 
 const queryConfig: QueryClientConfig = {
   defaultOptions: {
     queries: {
-      staleTime: Infinity,
+      refetchOnWindowFocus: false,
+      keepPreviousData: true,
+      retry: false,
+      cacheTime: 0,
+      staleTime: 0,
     },
   },
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
-  globalStyles();
-
   const [queryClient] = useState(() => new QueryClient(queryConfig));
   return (
-    <QueryClientProvider client={queryClient}>
-      <html lang="en">
-        {/*
+    <html lang="en">
+      {/*
         <head /> will contain the components returned by the nearest parent
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
-        <head />
-        <body>
-          <Layouts.Flex direction="column" css={{ margin: '1rem' }}>
-            {children}
-          </Layouts.Flex>
-        </body>
-      </html>
-    </QueryClientProvider>
+      <head />
+      <body>
+        <CacheProvider>
+          <ChakraProvider theme={theme} colorModeManager={localStorageManager}>
+            <ColorModeScript initialColorMode={theme.config?.initialColorMode} />
+            <QueryClientProvider client={queryClient}>
+              <Navbar />
+              <Box margin={{ lg: '1.5rem', '2xl': '0 auto' }} maxWidth="1440px">
+                {children}
+              </Box>
+            </QueryClientProvider>
+          </ChakraProvider>
+        </CacheProvider>
+      </body>
+    </html>
   );
 }
