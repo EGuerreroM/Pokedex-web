@@ -1,2 +1,2 @@
-// eslint-disable-next-line import/prefer-default-export
 export { default as PokemonCard } from './pokemon-card/PokemonCard';
+export { default as LoadingCard } from './loading-card/LoadingCard';
