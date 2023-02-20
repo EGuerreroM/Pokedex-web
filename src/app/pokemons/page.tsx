@@ -41,7 +41,7 @@ const Pokemons = () => {
 
   if (pokemonStatus === 'loading') {
     return (
-      <Grid templateColumns="repeat(3,1fr)">
+      <Grid templateColumns="repeat(3,320px)" alignItems="center" justifyContent="center" gap="1rem">
         {Array.from({ length: 9 }).map((_, index) => (
           <LoadingCard key={index} />
         ))}
