@@ -4,10 +4,24 @@
 
 import { LoadingCard, Pagination, PokemonCard } from '@/components';
 import ENDPOINTS from '@/constants/endpoints';
+import ROUTES from '@/constants/routes';
 import TIME from '@/constants/time';
-import { IPokemon } from '@/interfaces/API';
+import { IPokemon, IPokemonDetail } from '@/interfaces/API';
 import { getPokedexDetails, getPokemonsDetails } from '@/services';
-import { Grid, Stack, Text } from '@chakra-ui/react';
+import {
+  Box,
+  Grid,
+  Image,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalHeader,
+  ModalOverlay,
+  Stack,
+  Text,
+  useDisclosure,
+} from '@chakra-ui/react';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
 
@@ -20,6 +34,8 @@ const getPagedArray = <T,>(array: T[], pageSize: number, pageNumber: number) => 
 const Pokemons = () => {
   const [pokemons, setPokemons] = useState<IPokemon[]>([]);
   const [page, setPage] = useState(1);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [selectedPokemon, setSelectedPokemon] = useState<IPokemonDetail | null>(null);
 
   const { status: pokemonStatus } = useQuery({
     queryKey: ENDPOINTS.POKEDEXES.NATIONAL,
@@ -46,6 +62,11 @@ const Pokemons = () => {
 
   const totalPages = Math.ceil(pokemons.length / 9);
 
+  const onCardClick = (pokemon: IPokemonDetail) => {
+    setSelectedPokemon(pokemon);
+    onOpen();
+  };
+
   if (pokemonStatus === 'loading') {
     return (
       <Grid templateColumns="repeat(3,320px)" alignItems="center" justifyContent="center" gap="1rem">
@@ -69,9 +90,28 @@ const Pokemons = () => {
         ) : isError || !pokemonsDetailResponse ? (
           <Text>error</Text>
         ) : (
-          pokemonsDetailResponse.map((response) => <PokemonCard key={response.data.name} pokemonDetail={response.data} />)
+          pokemonsDetailResponse.map((response) => (
+            <PokemonCard key={response.data.name} pokemonDetail={response.data} onCardClick={onCardClick} />
+          ))
         )}
       </Grid>
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>
+            <Text>{selectedPokemon?.name}</Text>
+            <ModalCloseButton />
+          </ModalHeader>
+          <ModalBody>
+            <Box boxSize="md">
+              <Image
+                src={selectedPokemon?.sprites.other['official-artwork']?.front_default || ROUTES.IMAGES.PLACEHOLDER}
+                alt={selectedPokemon?.name}
+              />
+            </Box>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
     </Stack>
   );
 };

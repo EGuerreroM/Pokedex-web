@@ -4,6 +4,7 @@ import { Box, Card, CardBody, Image, Stack, Text } from '@chakra-ui/react';
 
 type PokemonCardProps = {
   pokemonDetail: IPokemonDetail;
+  onCardClick?: (pokemon: IPokemonDetail) => void;
 };
 
 const styledPokemonNumber = (number: number) => {
@@ -13,15 +14,21 @@ const styledPokemonNumber = (number: number) => {
 };
 
 const PokemonCard = (props: PokemonCardProps) => {
-  const { pokemonDetail } = props;
+  const { pokemonDetail, onCardClick } = props;
 
   const {
     sprites: { other },
   } = pokemonDetail;
   const { name } = pokemonDetail;
 
+  const onClick = () => {
+    if (onCardClick) {
+      onCardClick(pokemonDetail);
+    }
+  };
+
   return (
-    <Card maxW="xs" minH="23.5rem">
+    <Card maxW="xs" minH="23.5rem" onClick={onClick}>
       <CardBody>
         <Box minH="17.5rem">
           <Image src={other['official-artwork']?.front_default || ROUTES.IMAGES.PLACEHOLDER} alt={name} />
