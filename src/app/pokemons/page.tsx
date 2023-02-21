@@ -2,12 +2,12 @@
 
 'use client';
 
-import { LoadingCard, PokemonCard } from '@/components';
+import { LoadingCard, Pagination, PokemonCard } from '@/components';
 import ENDPOINTS from '@/constants/endpoints';
 import TIME from '@/constants/time';
 import { IPokemon } from '@/interfaces/API';
 import { getPokedexDetails, getPokemonsDetails } from '@/services';
-import { Grid, Text } from '@chakra-ui/react';
+import { Grid, Stack, Text } from '@chakra-ui/react';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
 
@@ -30,7 +30,12 @@ const Pokemons = () => {
     cacheTime: TIME.ONE_DAY,
   });
 
-  const { status, data: pokemonsDetailResponse } = useQuery({
+  const {
+    data: pokemonsDetailResponse,
+    isFetching,
+    isIdle,
+    isError,
+  } = useQuery({
     queryKey: ['pokemonDetails', page],
     queryFn: ({ signal }) =>
       getPokemonsDetails({ names: getPagedArray(pokemons, 9, page).map((pokemon) => pokemon.name), abortSignal: signal }),
@@ -38,6 +43,8 @@ const Pokemons = () => {
 
     cacheTime: TIME.ONE_DAY,
   });
+
+  const totalPages = Math.ceil(pokemons.length / 9);
 
   if (pokemonStatus === 'loading') {
     return (
@@ -54,15 +61,18 @@ const Pokemons = () => {
   }
 
   return (
-    <Grid templateColumns="repeat(3,320px)" alignItems="center" justifyContent="center" gap="1rem">
-      {status === 'idle' || status === 'loading' ? (
-        Array.from({ length: 9 }).map((_, index) => <LoadingCard key={index} />)
-      ) : status === 'error' ? (
-        <Text>error</Text>
-      ) : (
-        pokemonsDetailResponse.map((response) => <PokemonCard key={response.data.name} pokemonDetail={response.data} />)
-      )}
-    </Grid>
+    <Stack alignItems="center">
+      <Pagination totalPages={totalPages} onChange={setPage} />
+      <Grid templateColumns="repeat(3,320px)" alignItems="center" justifyContent="center" gap="1rem">
+        {isIdle || isFetching ? (
+          Array.from({ length: 9 }).map((_, index) => <LoadingCard key={index} />)
+        ) : isError || !pokemonsDetailResponse ? (
+          <Text>error</Text>
+        ) : (
+          pokemonsDetailResponse.map((response) => <PokemonCard key={response.data.name} pokemonDetail={response.data} />)
+        )}
+      </Grid>
+    </Stack>
   );
 };
 export default Pokemons;

@@ -1,6 +1,6 @@
 import ROUTES from '@/constants/routes';
 import { IPokemonDetail } from '@/interfaces/API';
-import { Card, CardBody, Image, Stack, Text } from '@chakra-ui/react';
+import { Box, Card, CardBody, Image, Stack, Text } from '@chakra-ui/react';
 
 type PokemonCardProps = {
   pokemonDetail: IPokemonDetail;
@@ -21,12 +21,14 @@ const PokemonCard = (props: PokemonCardProps) => {
   const { name } = pokemonDetail;
 
   return (
-    <Card maxW="xs">
+    <Card maxW="xs" minH="23.5rem">
       <CardBody>
-        <Image src={other['official-artwork']?.front_default || ROUTES.IMAGES.PLACEHOLDER} alt={name} />
+        <Box minH="17.5rem">
+          <Image src={other['official-artwork']?.front_default || ROUTES.IMAGES.PLACEHOLDER} alt={name} />
+        </Box>
         <Stack alignItems="center">
           <Text>{styledPokemonNumber(pokemonDetail.id)}</Text>
-          <Text>{name}</Text>
+          <Text textTransform="capitalize">{name}</Text>
         </Stack>
       </CardBody>
     </Card>
