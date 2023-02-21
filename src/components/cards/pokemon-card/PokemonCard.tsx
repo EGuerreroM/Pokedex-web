@@ -28,7 +28,17 @@ const PokemonCard = (props: PokemonCardProps) => {
   };
 
   return (
-    <Card maxW="xs" minH="23.5rem" onClick={onClick}>
+    <Card
+      maxW="xs"
+      minH="23.5rem"
+      onClick={onClick}
+      sx={{
+        transition: 'all 500ms ease-in-out',
+        ':hover': {
+          cursor: 'pointer',
+          transform: 'translateY(-5px) scale(1.005) translateZ(0)',
+        },
+      }}>
       <CardBody>
         <Box minH="17.5rem">
           <Image src={other['official-artwork']?.front_default || ROUTES.IMAGES.PLACEHOLDER} alt={name} />

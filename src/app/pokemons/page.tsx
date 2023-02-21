@@ -95,7 +95,7 @@ const Pokemons = () => {
           ))
         )}
       </Grid>
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>
@@ -103,12 +103,34 @@ const Pokemons = () => {
             <ModalCloseButton />
           </ModalHeader>
           <ModalBody>
-            <Box boxSize="md">
-              <Image
-                src={selectedPokemon?.sprites.other['official-artwork']?.front_default || ROUTES.IMAGES.PLACEHOLDER}
-                alt={selectedPokemon?.name}
-              />
-            </Box>
+            <Stack>
+              <Box boxSize="md">
+                <Image
+                  src={selectedPokemon?.sprites.other['official-artwork']?.front_default || ROUTES.IMAGES.PLACEHOLDER}
+                  alt={selectedPokemon?.name}
+                />
+              </Box>
+              <Stack>
+                <Stack direction="row" padding="1rem" gap="1rem">
+                  <Stack>
+                    <Text>Weight</Text>
+                    <Text>{`${selectedPokemon?.weight}kg`}</Text>
+                  </Stack>
+                  <Stack>
+                    <Text>Height</Text>
+                    <Text>{`${selectedPokemon?.height}cm`}</Text>
+                  </Stack>
+                </Stack>
+                <Stack direction="row" padding="1rem" gap="1rem">
+                  {selectedPokemon?.stats.map((stat) => (
+                    <Stack key={stat.stat.name}>
+                      <Text>{stat.stat.name}</Text>
+                      <Text>{stat.base_stat}</Text>
+                    </Stack>
+                  ))}
+                </Stack>
+              </Stack>
+            </Stack>
           </ModalBody>
         </ModalContent>
       </Modal>
