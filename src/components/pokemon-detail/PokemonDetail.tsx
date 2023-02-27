@@ -1,20 +1,15 @@
 'use-client';
 
-import { IPokemonDetail } from "@/interfaces/API";
+import { IPokemonDetail } from '@/interfaces/API';
 import ROUTES from '@/constants/routes';
-import {
-  Box,
-  Image,
-  Stack,
-  Text
-} from '@chakra-ui/react';
+import { Box, Image, Stack, Text } from '@chakra-ui/react';
 
-type PokemonDetailProps={
-  pokemonDetail: IPokemonDetail | null
-}
+type PokemonDetailProps = {
+  pokemonDetail: IPokemonDetail | null;
+};
 
 const PokemonDetail = (props: PokemonDetailProps) => {
-  const { pokemonDetail } = props
+  const { pokemonDetail } = props;
 
   return (
     <Stack>
@@ -45,7 +40,7 @@ const PokemonDetail = (props: PokemonDetailProps) => {
         </Stack>
       </Stack>
     </Stack>
-  )
-}
+  );
+};
 
 export default PokemonDetail;
