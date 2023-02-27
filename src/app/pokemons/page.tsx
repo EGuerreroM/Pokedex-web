@@ -5,14 +5,11 @@
 import { LoadingCard, Pagination, PokemonCard } from '@/components';
 import PokemonDetail from '@/components/pokemon-detail/PokemonDetail';
 import ENDPOINTS from '@/constants/endpoints';
-import ROUTES from '@/constants/routes';
 import TIME from '@/constants/time';
 import { IPokemon, IPokemonDetail } from '@/interfaces/API';
 import { getPokedexDetails, getPokemonsDetails } from '@/services';
 import {
-  Box,
   Grid,
-  Image,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -84,7 +81,6 @@ const Pokemons = () => {
 
   return (
     <Stack alignItems="center">
-      <Pagination totalPages={totalPages} onChange={setPage} />
       <Grid templateColumns="repeat(3,320px)" alignItems="center" justifyContent="center" gap="1rem">
         {isIdle || isFetching ? (
           Array.from({ length: 9 }).map((_, index) => <LoadingCard key={index} />)
@@ -96,6 +92,7 @@ const Pokemons = () => {
           ))
         )}
       </Grid>
+      <Pagination totalPages={totalPages} onChange={setPage} />
       <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <ModalOverlay />
         <ModalContent>
@@ -104,7 +101,7 @@ const Pokemons = () => {
             <ModalCloseButton />
           </ModalHeader>
           <ModalBody>
-            <PokemonDetail pokemonDetail={selectedPokemon}/>
+            <PokemonDetail pokemonDetail={selectedPokemon} />
           </ModalBody>
         </ModalContent>
       </Modal>

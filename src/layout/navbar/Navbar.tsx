@@ -16,12 +16,12 @@ import {
 
 const Navbar = () => {
   const { colorMode, toggleColorMode } = useColorMode();
+
   return (
     <Box
       position="sticky"
       top="0"
       bgColor={useColorModeValue('whiteAlpha.50', 'darkAlpha.50')}
-      color={useColorModeValue('dark', 'white')}
       zIndex="1"
       backdropFilter="blur( 8px )"
       border="1px solid rgba(255, 255, 255, 0.12)">

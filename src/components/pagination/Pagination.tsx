@@ -2,6 +2,7 @@
 
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 import { IconButton, Input, Stack, Text } from '@chakra-ui/react';
+import { debounce } from 'lodash';
 import { ChangeEvent, useState } from 'react';
 import { PaginationProps } from './Pagination.types';
 
