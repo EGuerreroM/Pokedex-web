@@ -1,46 +1,18 @@
 import ROUTES from '@/constants/routes';
 import { IPokemonDetail } from '@/interfaces/API';
 import { PokemonType } from '@/types/PokemonType';
-import { Box, Card, CardBody, Image, Stack, Text, useColorMode, useColorModeValue } from '@chakra-ui/react';
+import { gradientChooser, styledPokemonNumber } from '@/utils/style';
+import { Box, Card, CardBody, Image, Stack, Text } from '@chakra-ui/react';
 
 type PokemonCardProps = {
   pokemonDetail: IPokemonDetail;
   onCardClick?: (pokemon: IPokemonDetail) => void;
 };
 
-const styledPokemonNumber = (number: number) => {
-  if (number < 10) return `00${number}`;
-  if (number < 100) return `0${number}`;
-  return number;
-};
-
-const gradientChooser = (type: PokemonType) => {
-  switch (type) {
-    case 'bug':
-      return [50, 100, 500];
-
-    case 'normal':
-      return [50, 100, 200];
-
-    case 'dark':
-      return [50, 300, 800];
-
-    case 'psychic':
-      return [50, 100, 300];
-
-    case 'fairy':
-      return [50, 100, 200];
-
-    case 'dragon':
-      return [50, 100, 300];
-
-    default:
-      return [50, 100, 400];
-  }
-};
-
 const PokemonCard = (props: PokemonCardProps) => {
   const { pokemonDetail, onCardClick } = props;
+  const { types } = pokemonDetail;
+  const [firstType] = types;
 
   const {
     sprites: { other },
@@ -53,7 +25,7 @@ const PokemonCard = (props: PokemonCardProps) => {
     }
   };
 
-  const gradientColors = gradientChooser(pokemonDetail.types[0].type.name as PokemonType);
+  const [top, mid, bottom] = gradientChooser(pokemonDetail.types[0].type.name as PokemonType);
 
   return (
     <Card
@@ -61,7 +33,7 @@ const PokemonCard = (props: PokemonCardProps) => {
       minH="23.5rem"
       onClick={onClick}
       variant="filled"
-      bgGradient={`linear( to-b, ${pokemonDetail.types[0].type.name}.${gradientColors[0]} 5%, ${pokemonDetail.types[0].type.name}.${gradientColors[1]} 25% , ${pokemonDetail.types[0].type.name}.${gradientColors[2]}) 25%`}
+      bgGradient={`linear( to-b, ${firstType.type.name}.${top} 5%, ${firstType.type.name}.${mid} 25% , ${firstType.type.name}.${bottom}) 25%`}
       sx={{
         transition: 'all 500ms ease-in-out',
         ':hover': {
