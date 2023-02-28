@@ -1,3 +1,4 @@
+import { PokemonBaseStat } from '@/types/PokemonBaseStat';
 import { PokemonType } from '@/types/PokemonType';
 
 export const gradientChooser = (type: PokemonType) => {
@@ -29,4 +30,23 @@ export const styledPokemonNumber = (number: number) => {
   if (number < 10) return `00${number}`;
   if (number < 100) return `0${number}`;
   return number;
+};
+
+export const styledBaseStat = (stat: PokemonBaseStat) => {
+  switch (stat) {
+    case 'hp':
+      return 'HP';
+    case 'attack':
+      return 'ATK';
+    case 'defense':
+      return 'DEF';
+    case 'special-attack':
+      return 'SATK';
+    case 'special-defense':
+      return 'SDEF';
+    case 'speed':
+      return 'SPD';
+    default:
+      return 'STAT';
+  }
 };
