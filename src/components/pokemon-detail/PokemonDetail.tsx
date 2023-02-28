@@ -2,7 +2,8 @@
 
 import { IPokemonDetail } from '@/interfaces/API';
 import ROUTES from '@/constants/routes';
-import { Box, Image, Stack, Text } from '@chakra-ui/react';
+import { Box, Heading, Image, Stack } from '@chakra-ui/react';
+import StatBar from '../stat-bar/StatBar';
 
 type PokemonDetailProps = {
   pokemonDetail: IPokemonDetail | null;
@@ -10,32 +11,27 @@ type PokemonDetailProps = {
 
 const PokemonDetail = (props: PokemonDetailProps) => {
   const { pokemonDetail } = props;
-
   return (
-    <Stack>
-      <Box boxSize="md">
+    <Stack direction="row">
+      <Box boxSize="lg">
         <Image
           src={pokemonDetail?.sprites.other['official-artwork']?.front_default || ROUTES.IMAGES.PLACEHOLDER}
           alt={pokemonDetail?.name}
+          boxSize="100%"
         />
       </Box>
-      <Stack>
-        <Stack direction="row" padding="1rem" gap="1rem">
-          <Stack>
-            <Text>Weight</Text>
-            <Text>{`${pokemonDetail?.weight}kg`}</Text>
-          </Stack>
-          <Stack>
-            <Text>Height</Text>
-            <Text>{`${pokemonDetail?.height}cm`}</Text>
-          </Stack>
+      <Stack minW="xl">
+        <Stack>
+          <Heading textTransform="capitalize">{pokemonDetail?.name}</Heading>
         </Stack>
-        <Stack direction="row" padding="1rem" gap="1rem">
-          {pokemonDetail?.stats.map((stat) => (
-            <Stack key={stat.stat.name}>
-              <Text>{stat.stat.name}</Text>
-              <Text>{stat.base_stat}</Text>
-            </Stack>
+        <Stack gap="1rem">
+          {pokemonDetail?.stats.map((element) => (
+            <StatBar
+              key={element.stat.name}
+              value={element.base_stat}
+              pokemonType={pokemonDetail.types[0].type.name}
+              statName={element.stat.name}
+            />
           ))}
         </Stack>
       </Stack>

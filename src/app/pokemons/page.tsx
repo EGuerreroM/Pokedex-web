@@ -93,11 +93,10 @@ const Pokemons = () => {
         )}
       </Grid>
       <Pagination totalPages={totalPages} onChange={setPage} />
-      <Modal isOpen={isOpen} onClose={onClose} size="xl">
+      <Modal isOpen={isOpen} onClose={onClose} size="6xl">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>
-            <Text>{selectedPokemon?.name}</Text>
             <ModalCloseButton />
           </ModalHeader>
           <ModalBody>
