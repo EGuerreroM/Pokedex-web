@@ -1,5 +1,7 @@
 import ROUTES from '@/constants/routes';
 import { IPokemonDetail } from '@/interfaces/API';
+import { PokemonType } from '@/types/PokemonType';
+import { gradientChooser, styledPokemonNumber } from '@/utils/style';
 import { Box, Card, CardBody, Image, Stack, Text } from '@chakra-ui/react';
 
 type PokemonCardProps = {
@@ -7,14 +9,10 @@ type PokemonCardProps = {
   onCardClick?: (pokemon: IPokemonDetail) => void;
 };
 
-const styledPokemonNumber = (number: number) => {
-  if (number < 10) return `00${number}`;
-  if (number < 100) return `0${number}`;
-  return number;
-};
-
 const PokemonCard = (props: PokemonCardProps) => {
   const { pokemonDetail, onCardClick } = props;
+  const { types } = pokemonDetail;
+  const [firstType] = types;
 
   const {
     sprites: { other },
@@ -27,11 +25,15 @@ const PokemonCard = (props: PokemonCardProps) => {
     }
   };
 
+  const [top, mid, bottom] = gradientChooser(pokemonDetail.types[0].type.name as PokemonType);
+
   return (
     <Card
       maxW="xs"
       minH="23.5rem"
       onClick={onClick}
+      variant="filled"
+      bgGradient={`linear( to-b, ${firstType.type.name}.${top} 5%, ${firstType.type.name}.${mid} 25% , ${firstType.type.name}.${bottom}) 25%`}
       sx={{
         transition: 'all 500ms ease-in-out',
         ':hover': {
@@ -43,8 +45,10 @@ const PokemonCard = (props: PokemonCardProps) => {
         <Box minH="17.5rem">
           <Image src={other['official-artwork']?.front_default || ROUTES.IMAGES.PLACEHOLDER} alt={name} />
         </Box>
-        <Stack alignItems="center">
-          <Text>{styledPokemonNumber(pokemonDetail.id)}</Text>
+        <Stack
+          alignItems="center"
+          color={pokemonDetail.types[0].type.name === 'electric' ? 'blackAlpha.800' : 'whiteAlpha.800'}>
+          <Text fontWeight="semibold">{styledPokemonNumber(pokemonDetail.id)}</Text>
           <Text textTransform="capitalize">{name}</Text>
         </Stack>
       </CardBody>

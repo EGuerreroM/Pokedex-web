@@ -3,15 +3,13 @@
 'use client';
 
 import { LoadingCard, Pagination, PokemonCard } from '@/components';
+import PokemonDetail from '@/components/pokemon-detail/PokemonDetail';
 import ENDPOINTS from '@/constants/endpoints';
-import ROUTES from '@/constants/routes';
 import TIME from '@/constants/time';
 import { IPokemon, IPokemonDetail } from '@/interfaces/API';
 import { getPokedexDetails, getPokemonsDetails } from '@/services';
 import {
-  Box,
   Grid,
-  Image,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -83,7 +81,6 @@ const Pokemons = () => {
 
   return (
     <Stack alignItems="center">
-      <Pagination totalPages={totalPages} onChange={setPage} />
       <Grid templateColumns="repeat(3,320px)" alignItems="center" justifyContent="center" gap="1rem">
         {isIdle || isFetching ? (
           Array.from({ length: 9 }).map((_, index) => <LoadingCard key={index} />)
@@ -95,42 +92,15 @@ const Pokemons = () => {
           ))
         )}
       </Grid>
-      <Modal isOpen={isOpen} onClose={onClose} size="xl">
+      <Pagination totalPages={totalPages} onChange={setPage} />
+      <Modal isOpen={isOpen} onClose={onClose} size="6xl">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>
-            <Text>{selectedPokemon?.name}</Text>
             <ModalCloseButton />
           </ModalHeader>
           <ModalBody>
-            <Stack>
-              <Box boxSize="md">
-                <Image
-                  src={selectedPokemon?.sprites.other['official-artwork']?.front_default || ROUTES.IMAGES.PLACEHOLDER}
-                  alt={selectedPokemon?.name}
-                />
-              </Box>
-              <Stack>
-                <Stack direction="row" padding="1rem" gap="1rem">
-                  <Stack>
-                    <Text>Weight</Text>
-                    <Text>{`${selectedPokemon?.weight}kg`}</Text>
-                  </Stack>
-                  <Stack>
-                    <Text>Height</Text>
-                    <Text>{`${selectedPokemon?.height}cm`}</Text>
-                  </Stack>
-                </Stack>
-                <Stack direction="row" padding="1rem" gap="1rem">
-                  {selectedPokemon?.stats.map((stat) => (
-                    <Stack key={stat.stat.name}>
-                      <Text>{stat.stat.name}</Text>
-                      <Text>{stat.base_stat}</Text>
-                    </Stack>
-                  ))}
-                </Stack>
-              </Stack>
-            </Stack>
+            <PokemonDetail pokemonDetail={selectedPokemon} />
           </ModalBody>
         </ModalContent>
       </Modal>
