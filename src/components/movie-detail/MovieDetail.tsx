@@ -8,7 +8,8 @@ import {
   Heading,
   Image,
   Stack,
-  Text
+  Text,
+  Button
 } from '@chakra-ui/react';
 
 type MovieDetailProps = {
@@ -33,6 +34,18 @@ const MovieDetail = (props: MovieDetailProps) => {
         </Stack>
         <Stack gap="1rem">
           <Text>{movieDetail?.overview}</Text>
+
+          <Stack spacing={4} direction='row' align='center'>
+            <Button colorScheme='teal' size='sm'>
+              Prime Video
+            </Button>
+            <Button colorScheme='teal' size='sm'>
+              Netflix
+            </Button>
+            <Button colorScheme='teal' size='sm'>
+              HBO Max
+            </Button>
+          </Stack>
         </Stack>
       </Stack>
     </Stack>

@@ -1,6 +1,6 @@
 'use client';
 
-import { LoadingCard, MovieCard } from '@/components';
+import { LoadingCard, Pagination, MovieCard } from '@/components';
 import MovieDetail from '@/components/movie-detail/MovieDetail';
 import ENDPOINTS from '@/constants/endpoints';
 import TIME from '@/constants/time';
@@ -23,8 +23,10 @@ import { useQuery } from 'react-query';
 
 const Movies = () => {
   const [movies, setMovies] = useState<IPokemonMovie[]>([]);
+  const [page, setPage] = useState(1);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedMovie, setSelectedMovie] = useState<IPokemonMovie | null>(null);
+  const [totalPages, setTotalPages] = useState(1);
 
   const {
     isFetching,
@@ -32,10 +34,11 @@ const Movies = () => {
     isError,
     status: moviesStatus
   } = useQuery({
-    queryKey: ENDPOINTS.POKEMONSMOVIES.DATA,
-    queryFn: () => getPokemonMovies(),
+    queryKey: ['moviesDetail', page],
+    queryFn: () => getPokemonMovies({ page: page }),
     onSuccess: (movies) => {
       setMovies(movies.data.results);
+      setTotalPages(movies.data.total_pages)
     },
     cacheTime: TIME.ONE_DAY,
   });
@@ -72,6 +75,7 @@ const Movies = () => {
           ))
         )}
       </Grid>
+      <Pagination totalPages={totalPages} onChange={setPage} />
       <Modal isOpen={isOpen} onClose={onClose} size="6xl">
         <ModalOverlay />
         <ModalContent>
