@@ -9,14 +9,14 @@ const POKEMONS = {
   DETAIL: (name: string) => `pokemons/${name}`,
 };
 
-const BERRIES = {
-  LIST: 'berries',
+const MOVIES = {
+  LIST: 'movies',
 };
 
 const ROUTES = {
   HOME,
   IMAGES,
   POKEMONS,
-  BERRIES,
+  MOVIES,
 };
 export default ROUTES;
