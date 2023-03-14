@@ -21,7 +21,8 @@ const MovieCard = (props: PokemonCardProps) => {
 
   return (
     <Card
-      maxW="xs"
+      h="100%"
+      maxW="sm"
       minH="23.5rem"
       onClick={onClick}
       variant="filled"
@@ -34,11 +35,12 @@ const MovieCard = (props: PokemonCardProps) => {
       }}>
       <CardBody>
         <Box minH="17.5rem">
-          <Image src={ ENVIROMENT.IMAGEURL(poster_path) || ROUTES.IMAGES.PLACEHOLDER} alt={title} />
+          <Image borderRadius="5px" src={ENVIROMENT.IMAGEURL(poster_path) || ROUTES.IMAGES.PLACEHOLDER} alt={title} />
         </Box>
-        <Stack
-          alignItems="center">
-          <Text textTransform="capitalize">{title}</Text>
+        <Stack alignItems="center" h="30%">
+          <Text textAlign="center" marginTop="10px" as="b" textTransform="capitalize">
+            {title}
+          </Text>
         </Stack>
       </CardBody>
     </Card>
