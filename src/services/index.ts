@@ -1,3 +1,3 @@
 export * from './pokedex';
 export * from './pokemon';
-export * from './pokemonMovies';
+export { default as getPokemonMovies } from './pokemonMovies';

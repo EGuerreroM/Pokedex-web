@@ -66,9 +66,7 @@ const Movies = () => {
         ) : isError || !movies ? (
           <Text>error</Text>
         ) : (
-          movies.map((response) => (
-            <MovieCard key={response.id} movieDetail={response} onCardClick={onCardClick} />
-          ))
+          movies.map((response) => <MovieCard key={response.id} movieDetail={response} onCardClick={onCardClick} />)
         )}
       </Grid>
       <Pagination totalPages={totalPages} onChange={setPage} />
