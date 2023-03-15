@@ -1,4 +1,4 @@
-import { IPokemonMovie } from "./IPokemonMovie";
+import { IPokemonMovie } from './IPokemonMovie';
 
 export interface IPokemonMoviesResponse {
   page: number;

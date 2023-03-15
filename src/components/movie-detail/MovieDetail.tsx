@@ -3,14 +3,7 @@
 import ENVIROMENT from '@/constants/enviroment';
 import ROUTES from '@/constants/routes';
 import { IPokemonMovie } from '@/interfaces/API';
-import {
-  Box,
-  Heading,
-  Image,
-  Stack,
-  Text,
-  Button
-} from '@chakra-ui/react';
+import { Box, Heading, Image, Stack, Text, Button } from '@chakra-ui/react';
 
 type MovieDetailProps = {
   movieDetail: IPokemonMovie | null;
@@ -23,7 +16,7 @@ const MovieDetail = (props: MovieDetailProps) => {
     <Stack direction="row">
       <Box boxSize="lg">
         <Image
-          src={ ENVIROMENT.IMAGEURL(movieDetail?.poster_path ? movieDetail?.poster_path : "") || ROUTES.IMAGES.PLACEHOLDER}
+          src={ENVIROMENT.IMAGEURL(movieDetail?.poster_path ? movieDetail?.poster_path : '') || ROUTES.IMAGES.PLACEHOLDER}
           alt={movieDetail?.title}
           boxSize="100%"
         />
@@ -35,14 +28,14 @@ const MovieDetail = (props: MovieDetailProps) => {
         <Stack gap="1rem">
           <Text>{movieDetail?.overview}</Text>
 
-          <Stack spacing={4} direction='row' align='center'>
-            <Button colorScheme='teal' size='sm'>
+          <Stack spacing={4} direction="row" align="center">
+            <Button colorScheme="teal" size="sm">
               Prime Video
             </Button>
-            <Button colorScheme='teal' size='sm'>
+            <Button colorScheme="teal" size="sm">
               Netflix
             </Button>
-            <Button colorScheme='teal' size='sm'>
+            <Button colorScheme="teal" size="sm">
               HBO Max
             </Button>
           </Stack>

@@ -10,8 +10,6 @@ type PokemonCardProps = {
 
 const MovieCard = (props: PokemonCardProps) => {
   const { movieDetail, onCardClick } = props;
-  const { title } = movieDetail;
-  const { poster_path } = movieDetail;
 
   const onClick = () => {
     if (onCardClick) {
@@ -34,11 +32,10 @@ const MovieCard = (props: PokemonCardProps) => {
       }}>
       <CardBody>
         <Box minH="17.5rem">
-          <Image src={ ENVIROMENT.IMAGEURL(poster_path) || ROUTES.IMAGES.PLACEHOLDER} alt={title} />
+          <Image src={ENVIROMENT.IMAGEURL(movieDetail.poster_path) || ROUTES.IMAGES.PLACEHOLDER} alt={movieDetail.title} />
         </Box>
-        <Stack
-          alignItems="center">
-          <Text textTransform="capitalize">{title}</Text>
+        <Stack alignItems="center">
+          <Text textTransform="capitalize">{movieDetail.title}</Text>
         </Stack>
       </CardBody>
     </Card>

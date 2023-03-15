@@ -1,8 +1,9 @@
+/* eslint-disable no-nested-ternary */
+
 'use client';
 
 import { LoadingCard, Pagination, MovieCard } from '@/components';
 import MovieDetail from '@/components/movie-detail/MovieDetail';
-import ENDPOINTS from '@/constants/endpoints';
 import TIME from '@/constants/time';
 import { IPokemonMovie } from '@/interfaces/API';
 import { getPokemonMovies } from '@/services';
@@ -28,17 +29,12 @@ const Movies = () => {
   const [selectedMovie, setSelectedMovie] = useState<IPokemonMovie | null>(null);
   const [totalPages, setTotalPages] = useState(1);
 
-  const {
-    isFetching,
-    isIdle,
-    isError,
-    status: moviesStatus
-  } = useQuery({
+  const { isFetching, isIdle, isError, status } = useQuery({
     queryKey: ['moviesDetail', page],
-    queryFn: () => getPokemonMovies({ page: page }),
-    onSuccess: (movies) => {
-      setMovies(movies.data.results);
-      setTotalPages(movies.data.total_pages)
+    queryFn: () => getPokemonMovies({ page }),
+    onSuccess: (response) => {
+      setMovies(response.data.results);
+      setTotalPages(response.data.total_pages);
     },
     cacheTime: TIME.ONE_DAY,
   });
@@ -48,7 +44,7 @@ const Movies = () => {
     onOpen();
   };
 
-  if (moviesStatus === 'loading') {
+  if (status === 'loading') {
     return (
       <Grid templateColumns="repeat(3,320px)" alignItems="center" justifyContent="center" gap="1rem">
         {Array.from({ length: 9 }).map((_, index) => (
@@ -58,7 +54,7 @@ const Movies = () => {
     );
   }
 
-  if (moviesStatus === 'error') {
+  if (status === 'error') {
     return <Text>error</Text>;
   }
 
@@ -71,7 +67,7 @@ const Movies = () => {
           <Text>error</Text>
         ) : (
           movies.map((response) => (
-            <MovieCard key={response.id} movieDetail={response} onCardClick={onCardClick}/>
+            <MovieCard key={response.id} movieDetail={response} onCardClick={onCardClick} />
           ))
         )}
       </Grid>
@@ -83,7 +79,7 @@ const Movies = () => {
             <ModalCloseButton />
           </ModalHeader>
           <ModalBody>
-            <MovieDetail movieDetail={selectedMovie}/>
+            <MovieDetail movieDetail={selectedMovie} />
           </ModalBody>
         </ModalContent>
       </Modal>

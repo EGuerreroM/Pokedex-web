@@ -1,3 +1,5 @@
+/* eslint-disable import/prefer-default-export */
+
 import ENDPOINTS from '@/constants/endpoints';
 import { IPokemonMoviesResponse } from '@/interfaces/API';
 import axios from 'axios';
