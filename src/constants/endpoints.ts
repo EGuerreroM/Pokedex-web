@@ -1,4 +1,4 @@
-import ENVIROMENT from "./enviroment";
+import ENVIROMENT from './enviroment';
 
 const POKEMONS = {
   DATA: 'https://pokeapi.co/api/v2/pokemon',
@@ -13,8 +13,9 @@ const POKEDEXES = {
 };
 
 const POKEMONSMOVIES = {
-  MOVIES: (page: number) => `https://api.themoviedb.org/3/search/movie?api_key=${ENVIROMENT.APIKEY}&language=en-US&query=pokemon&page=${page}&include_adult=false`
-}
+  MOVIES: (page: number) =>
+    `https://api.themoviedb.org/3/search/movie?api_key=${ENVIROMENT.APIKEY}&language=en-US&query=pokemon&page=${page}&include_adult=false`,
+};
 
 const ENDPOINTS = {
   POKEMONS,

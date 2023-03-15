@@ -2,7 +2,6 @@
 
 import { LoadingCard, Pagination, MovieCard } from '@/components';
 import MovieDetail from '@/components/movie-detail/MovieDetail';
-import ENDPOINTS from '@/constants/endpoints';
 import TIME from '@/constants/time';
 import { IPokemonMovie } from '@/interfaces/API';
 import { getPokemonMovies } from '@/services';
@@ -32,13 +31,13 @@ const Movies = () => {
     isFetching,
     isIdle,
     isError,
-    status: moviesStatus
+    status: moviesStatus,
   } = useQuery({
     queryKey: ['moviesDetail', page],
-    queryFn: () => getPokemonMovies({ page: page }),
-    onSuccess: (movies) => {
-      setMovies(movies.data.results);
-      setTotalPages(movies.data.total_pages)
+    queryFn: () => getPokemonMovies({ page }),
+    onSuccess: (response) => {
+      setMovies(response.data.results);
+      setTotalPages(response.data.total_pages);
     },
     cacheTime: TIME.ONE_DAY,
   });
@@ -70,9 +69,7 @@ const Movies = () => {
         ) : isError || !movies ? (
           <Text>error</Text>
         ) : (
-          movies.map((response) => (
-            <MovieCard key={response.id} movieDetail={response} onCardClick={onCardClick}/>
-          ))
+          movies.map((response) => <MovieCard key={response.id} movieDetail={response} onCardClick={onCardClick} />)
         )}
       </Grid>
       <Pagination totalPages={totalPages} onChange={setPage} />
@@ -83,7 +80,7 @@ const Movies = () => {
             <ModalCloseButton />
           </ModalHeader>
           <ModalBody>
-            <MovieDetail movieDetail={selectedMovie}/>
+            <MovieDetail movieDetail={selectedMovie} />
           </ModalBody>
         </ModalContent>
       </Modal>

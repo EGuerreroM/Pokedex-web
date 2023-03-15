@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Text, Heading, Stack, Image } from '@chakra-ui/react';
+import { Stack, Image } from '@chakra-ui/react';
 
 export default function Home() {
   return (

@@ -6,6 +6,8 @@ type GetMovieListArgs = {
   page?: number;
 };
 
-export const getPokemonMovies = async ({ page = 1 }: GetMovieListArgs) => {
+const getPokemonMovies = async ({ page = 1 }: GetMovieListArgs) => {
   return axios.get<IPokemonMoviesResponse>(ENDPOINTS.POKEMONSMOVIES.MOVIES(page));
 };
+
+export default getPokemonMovies;
