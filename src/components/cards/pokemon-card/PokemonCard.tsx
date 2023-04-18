@@ -49,7 +49,9 @@ const PokemonCard = (props: PokemonCardProps) => {
           alignItems="center"
           color={pokemonDetail.types[0].type.name === 'electric' ? 'blackAlpha.800' : 'whiteAlpha.800'}>
           <Text fontWeight="semibold">{styledPokemonNumber(pokemonDetail.id)}</Text>
-          <Text textTransform="capitalize">{name}</Text>
+          <Text textTransform="capitalize" fontSize="lg">
+            {name}
+          </Text>
         </Stack>
       </CardBody>
     </Card>
