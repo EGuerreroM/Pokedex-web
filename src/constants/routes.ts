@@ -1,6 +1,7 @@
 const IMAGES = {
   PLACEHOLDER: '/images/pokeball.png',
   CHARIZARD: '/images/charizard.png',
+  CINEMA: '/images/cinema.jpg',
 };
 
 const HOME = '/';
