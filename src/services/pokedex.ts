@@ -14,6 +14,7 @@ type GetPokedexDetailArgs = {
   pokedexUrl: string;
   abortSignal?: AbortSignal;
 };
+
 export const getPokedexList = async ({ limit = 100, offset = 0, abortSignal }: GetPokedexListArgs) => {
   return axios.get<IApiResponse<IPokedex>>(ENDPOINTS.POKEDEXES.DATA, {
     params: { limit, offset },

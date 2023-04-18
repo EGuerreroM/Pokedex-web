@@ -54,7 +54,6 @@ const Pokemons = () => {
     queryFn: ({ signal }) =>
       getPokemonsDetails({ names: getPagedArray(pokemons, 9, page).map((pokemon) => pokemon.name), abortSignal: signal }),
     enabled: !!pokemons.length,
-
     cacheTime: TIME.ONE_DAY,
   });
 
