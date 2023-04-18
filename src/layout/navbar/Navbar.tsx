@@ -45,11 +45,11 @@ const Navbar = () => {
               <Text>Pokédex</Text>
             </Link>
           </BreadcrumbItem>
-          {/* <BreadcrumbItem>
-            <Link href={ROUTES.BERRIES.LIST}>
-              <Text>Berries</Text>
+          <BreadcrumbItem>
+            <Link href={ROUTES.MOVIES.LIST}>
+              <Text>Movies</Text>
             </Link>
-          </BreadcrumbItem> */}
+          </BreadcrumbItem>
         </Breadcrumb>
       </Flex>
     </Box>
