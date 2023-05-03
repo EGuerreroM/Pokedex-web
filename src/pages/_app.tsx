@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { QueryClient, QueryClientConfig, QueryClientProvider } from 'react-query';
 import { Box, ChakraProvider, ColorModeScript } from '@chakra-ui/react';
 import theme from '@/theme/theme';
+import { Navbar } from '@/layout';
 
 const queryConfig: QueryClientConfig = {
   defaultOptions: {
@@ -22,6 +23,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <ChakraProvider resetCSS theme={theme}>
       <ColorModeScript initialColorMode={theme.config?.initialColorMode} />
       <QueryClientProvider client={queryClient}>
+        <Navbar />
         <Box margin={{ lg: '1.5rem', '2xl': '0 auto' }}>
           <Component {...pageProps} />
         </Box>
