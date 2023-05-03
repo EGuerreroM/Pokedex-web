@@ -4,6 +4,10 @@ const IMAGES = {
   CINEMA: '/images/cinema.jpg',
 };
 
+const SVG = {
+  POKEMON: '/images/pokeball-open.png',
+};
+
 const HOME = '/';
 
 const POKEMONS = {
@@ -20,5 +24,6 @@ const ROUTES = {
   IMAGES,
   POKEMONS,
   MOVIES,
+  SVG,
 };
 export default ROUTES;
