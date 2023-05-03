@@ -3,7 +3,7 @@
 import ENVIROMENT from '@/constants/enviroment';
 import ROUTES from '@/constants/routes';
 import { IPokemonMovie } from '@/interfaces/API';
-import { Link, Box, Heading, Image, Stack, Text, Button } from '@chakra-ui/react';
+import { Link, Box, Heading, Image, Stack, Text } from '@chakra-ui/react';
 import { ExternalLinkIcon } from '@chakra-ui/icons';
 
 type MovieDetailProps = {

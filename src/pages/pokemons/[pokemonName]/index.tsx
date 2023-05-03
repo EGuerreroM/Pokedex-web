@@ -7,14 +7,17 @@ import { Flex, Image, Stack } from '@chakra-ui/react';
 import { useQuery } from 'react-query';
 
 import StatBar from '@/components/stat-bar/StatBar';
+import { useRouter } from 'next/router';
 
-const PokemonDetail = ({ params }: { params: { pokemonName: string } }) => {
-  const { pokemonName } = params;
+const PokemonDetail = () => {
+  const router = useRouter();
+  const { pokemonName } = router.query;
 
   const { data: pokemonDetailResponse, status } = useQuery({
     queryKey: ['pokemon', pokemonName],
-    queryFn: ({ signal }) => getPokemonDetail({ abortSignal: signal, name: pokemonName }),
+    queryFn: ({ signal }) => getPokemonDetail({ abortSignal: signal, name: (pokemonName as string) ?? '' }),
     cacheTime: TIME.ONE_DAY,
+    enabled: !!pokemonName,
   });
 
   return status === 'loading' || status === 'idle' ? (
