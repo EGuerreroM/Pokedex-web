@@ -1,5 +1,3 @@
-'use client';
-
 import ROUTES from '@/constants/routes';
 import { Link } from '@chakra-ui/next-js';
 import { Box, Text, Stack, Image, Button } from '@chakra-ui/react';
