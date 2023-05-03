@@ -1,7 +1,5 @@
 /* eslint-disable no-nested-ternary */
 
-'use client';
-
 import { LoadingCard, Pagination, MovieCard } from '@/components';
 import MovieDetail from '@/components/movie-detail/MovieDetail';
 import TIME from '@/constants/time';
