@@ -1,6 +1,6 @@
 import ROUTES from '@/constants/routes';
 import { Link } from '@chakra-ui/next-js';
-import { Button, Image, List, Stack, Text } from '@chakra-ui/react';
+import { Button, Image, Stack, Text } from '@chakra-ui/react';
 
 const NotFound = () => {
   return (
