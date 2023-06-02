@@ -2,6 +2,7 @@ const IMAGES = {
   PLACEHOLDER: '/images/pokeball.png',
   CHARIZARD: '/images/charizard.png',
   CINEMA: '/images/cinema.jpg',
+  LOGO: '/images/logo.svg',
 };
 
 const SVG = {

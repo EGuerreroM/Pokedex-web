@@ -12,7 +12,17 @@ import {
   IconButton,
   useColorMode,
   Box,
+  Image,
 } from '@chakra-ui/react';
+import styled from '@emotion/styled';
+
+import Logo from '../../../public/images/logo.svg';
+
+const StyledLogo = styled(Logo)({
+  width: '200px',
+
+  height: '100px',
+});
 
 const Navbar = () => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -27,7 +37,7 @@ const Navbar = () => {
       border="1px solid rgba(255, 255, 255, 0.12)">
       <Flex padding="2.5" alignItems="center" justify="space-bewteen" maxWidth="1440px" margin="0 auto">
         <Link href={ROUTES.HOME}>
-          <Heading as="h2">PokéMerch</Heading>
+          <StyledLogo />
         </Link>
         <Spacer />
 
